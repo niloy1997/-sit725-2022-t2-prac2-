@@ -2,9 +2,17 @@ var express = require("express")
 var app = express()
 var port = process.env.port || 3000;
 
+app.use(express.static(__dirname+'/public'))
+app.use(express.json());
+app.use(express.urlencoded({extends: false}));
+
 function addNumbers(number1, number2){
     return number1 + number2;
 }
+
+app.get('/', (req, res) =>{
+    res.render('index.html');
+});
 
 app.get('/addTwoNumbers', (req, res) =>{
     var number1= req.query.number1;
